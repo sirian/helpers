@@ -1,0 +1,6 @@
+{
+    "name": "sirian/helpers",
+    "autoload": {
+        "psr-0": { "Sirian\\": "" }
+    }
+}
