@@ -1,6 +1,6 @@
 <?php
 
-namespace Sirian;
+namespace Sirian\Helpers;
 
 class TextUtils
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sirian;
+namespace Sirian\Helpers;
 
 class Url
 {
@@ -116,6 +116,7 @@ class Url
     public function setQueryParam($param, $value)
     {
         $this->query[$param] = $value;
+        $this->url = null;
         return $this;
     }
 
