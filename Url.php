@@ -120,6 +120,13 @@ class Url
         return $this;
     }
 
+    public function unsetQueryParam($param)
+    {
+        unset($this->query[$param]);
+        $this->url = null;
+        return $this;
+    }
+
     public function getQueryParam($param)
     {
         return isset($this->query[$param]) ? $this->query[$param] : null;
