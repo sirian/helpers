@@ -41,6 +41,14 @@ class Queue
         return $this;
     }
 
+    public function addProcesses(array $processes, $priority = 0)
+    {
+        foreach ($processes as $process) {
+            $this->addProcess($process, $priority);
+        }
+        return $this;
+    }
+
     public function addListener($eventName, $listener, $priority = 0)
     {
         $this->eventDispatcher->addListener($eventName, $listener, $priority);
@@ -131,7 +139,8 @@ class Queue
 
     public function setConcurrency($concurrency)
     {
-        $this->concurrency = max(1, $concurrency);
+
+        $this->concurrency = $concurrency ? max(1, $concurrency) : null;
         $this->process();
         return $this;
     }
