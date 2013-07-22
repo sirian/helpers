@@ -38,6 +38,7 @@ class CallbackProvider implements ProviderInterface
         if (null !== $this->nextProcess) {
             return $this->nextProcess;
         }
+
         $process = call_user_func($this->callback);
         $this->nextProcess = $process instanceof Process ? $process : null;
         return $this->nextProcess;

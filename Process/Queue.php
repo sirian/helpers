@@ -9,8 +9,8 @@ use Symfony\Component\Process\Process;
 
 class Queue
 {
-    const EVENT_PROCESS_FINISHED = 0;
-    const EVENT_PROCESS_STARTED = 1;
+    const EVENT_PROCESS_FINISHED = 'process_finished';
+    const EVENT_PROCESS_STARTED = 'process_started';
 
     protected $concurrency;
     protected $processQueue;
@@ -74,7 +74,7 @@ class Queue
 
         $this->isStarted = true;
 
-        while (true) {
+        while (!$this->isDrain()) {
             foreach ($this->activeProcesses as $key => $process) {
                 if (!$process->isRunning()) {
                     $this->eventDispatcher->dispatch(self::EVENT_PROCESS_FINISHED, new ProcessEvent($process));
@@ -84,10 +84,6 @@ class Queue
 
             if (!$this->isSaturated()) {
                 $this->process();
-            }
-
-            if ($this->isDrain()) {
-                break;
             }
 
             usleep(1000);
