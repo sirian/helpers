@@ -39,4 +39,14 @@ class TextUtils
     {
         return strtolower(self::translit($alias, '-'));
     }
+
+    public static function pluralize($count, $variants = array())
+    {
+        $variant = (($count % 10 == 1) && ($count % 100 != 11)) ? 0 : ((($count % 10 >= 2) && ($count % 10 <= 4) && (($count % 100 < 10) || ($count % 100 >= 20))) ? 1 : 2);
+        if (isset($variants[$variant])) {
+            return str_replace('%count%', $count, isset($variants[$variant]) ? $variants[$variant] : '');
+        } else {
+            return '';
+        }
+    }
 }
