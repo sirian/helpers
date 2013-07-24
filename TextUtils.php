@@ -4,7 +4,7 @@ namespace Sirian\Helpers;
 
 class TextUtils
 {
-    public static function translit($title, $delimiter = '_')
+    public static function translit($text, $delimiter = '_')
     {
         $converter = array(
             'а' => 'a',   'б' => 'b',   'в' => 'v',
@@ -32,12 +32,12 @@ class TextUtils
              " " => $delimiter
         );
 
-        return trim(preg_replace(array('/[\W]/', '/' . $delimiter . '+/'), array($delimiter, $delimiter), strtr($title, $converter)), $delimiter);
+        return trim(preg_replace(array('/[\W]/', '/' . $delimiter . '+/'), array($delimiter, $delimiter), strtr($text, $converter)), $delimiter);
     }
 
-    public static function alias($alias)
+    public static function slug($text)
     {
-        return strtolower(self::translit($alias, '-'));
+        return strtolower(self::translit($text, '-'));
     }
 
     public static function pluralize($count, $variants = array())
